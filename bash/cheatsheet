@@ -1,0 +1,30 @@
+# Bash
+## Indexed and Associative Arrays
+	### create fixed size array
+		#### filled with inline values
+			##### indexed
+				$ declare -a x=(1 2 3 4)
+			##### Associative
+				$ declare -A x=([key1]=1 [key2]=2 [key3]=3 [key4]=4)
+	#### iterate over array
+		### indexed
+			$ for i in ${x[*]};
+			> do
+			> 	val=i
+			> done
+		### Associative
+			$ for key in ${!x[*]};
+			> do
+			>	val=x[$key]
+			> done
+
+## Sequence of numbers
+	
+	### increment by 1
+		$ seq 1 20
+
+	### increment by n
+		$ seq 1 n 20
+
+	### store sequence in array
+		$ x=($(seq 1 5 20))

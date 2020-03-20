@@ -1,0 +1,14 @@
+"set color theme
+colo murphy
+
+"set line numbers
+set nu
+
+"set cursor to vertical line
+set guicursor=i:ver25-iCursor
+
+"set tabs to 4 white spaces
+set ts=4 sw=4
+
+"use mouse in editor
+set mouse=a

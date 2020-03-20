@@ -1,2 +1,15 @@
-# essentials
-Programming cheat sheet for the people.
+# Programming Essentials
+
+Motivation: Use stackoverflow less uwu
+
+
+
+* Bash
+* Sed
+* Grep
+* Awk
+* vim
+* C
+* Python
+
+
