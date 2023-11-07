@@ -2,8 +2,7 @@
 
 Motivation: Use stackoverflow less uwu
 
-
-
+* Git
 * Bash
 * Sed
 * Grep
