@@ -1,6 +1,6 @@
 # Programming Essentials
 
-Motivation: Use stackoverflow less uwu
+Motivation: Use stackoverflow less
 
 * Git
 * Bash
