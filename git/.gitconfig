@@ -1,0 +1,14 @@
+[user]
+    email = <your-email>
+    name = <your-username>
+
+[pull]
+    rebase = true
+
+[branch]
+    autosetuprebase = always
+
+[pager]
+    branch = false
+    log = false
+    diff = false
