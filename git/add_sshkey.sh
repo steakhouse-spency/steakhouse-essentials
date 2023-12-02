@@ -3,10 +3,6 @@
 # https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
 email="<insert email"
 
-function steak(){
-	echo "\n🥩🥩🥩\n$1\n🥩🥩🥩\n"
-}
-
 ssh_key_filename="github_ssh_key"
 
 steak "creating ssh key - press enter when prompted"
