@@ -1,28 +1,31 @@
+touch ~/.hushlogin
 export PATH="~/github/steakhouse-essentials/bash:$PATH"
 
-# steak
-clear
-echo "
+# steak signatures
 
+function steak_vertical(){
+  echo "
   ░██████╗██╗░░██╗████████╗███████╗░█████╗░██╗░░██╗
   ██╔════╝██║░░██║╚══██╔══╝██╔════╝██╔══██╗██║░██╔╝
   ╚█████╗░███████║░░░██║░░░█████╗░░███████║█████═╝░
   ░╚═══██╗██╔══██║░░░██║░░░██╔══╝░░██╔══██║██╔═██╗░
   ██████╔╝██║░░██║░░░██║░░░███████╗██║░░██║██║░╚██╗
-  ╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝
-                                                  
+  ╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝                                            
     ██╗░░██╗░█████╗░██╗░░░██╗░██████╗███████╗
     ██║░░██║██╔══██╗██║░░░██║██╔════╝██╔════╝
     ███████║██║░░██║██║░░░██║╚█████╗░█████╗░░
     ██╔══██║██║░░██║██║░░░██║░╚═══██╗██╔══╝░░
     ██║░░██║╚█████╔╝╚██████╔╝██████╔╝███████╗
     ╚═╝░░╚═╝░╚════╝░░╚═════╝░╚═════╝░╚══════╝
-
 "
+}
+
 function steak(){
   echo "\n🥩🥩🥩\n$1\n🥩🥩🥩\n"
 }
 
+# steak intro
+steak_vertical
 
 # Bash
 alias c="clear"
@@ -48,3 +51,97 @@ alias gitrb="git fetch origin main && git rebase origin/main"
 alias gitbdelete="git branch -D"
 alias gitb="git branch"
 alias gitco="git checkout"
+
+# python
+alias python="/opt/homebrew/bin/python3"
+
+
+
+# iterm option+arrow (cursor word jump)
+bindkey '^[b' backward-word
+bindkey '^[f' forward-word
+bindkey '^[[1;3D' backward-word
+bindkey '^[[1;3C' forward-word
+bindkey '^[[1;9D' backward-word
+bindkey '^[[1;9C' forward-word
+bindkey '^[^[[D' backward-word
+bindkey '^[^[[C' forward-word
+
+
+# iterm: option+shift+arrow (jump highlight)
+select-forward-word() {
+  (( REGION_ACTIVE )) || zle set-mark-command
+  zle forward-word
+}
+
+select-backward-word() {
+  (( REGION_ACTIVE )) || zle set-mark-command
+  zle backward-word
+}
+
+zle -N select-forward-word
+zle -N select-backward-word
+
+bindkey '^[[1;4C' select-forward-word
+bindkey '^[[1;4D' select-backward-word
+bindkey '^[[1;10C' select-forward-word
+bindkey '^[[1;10D' select-backward-word
+
+
+# while a region is active, plain left/right collapse the selection
+collapse-or-backward-char() {
+  if (( REGION_ACTIVE )); then
+    (( CURSOR = CURSOR < MARK ? CURSOR : MARK ))
+    zle deactivate-region
+  else
+    zle backward-char
+  fi
+}
+
+collapse-or-forward-char() {
+  if (( REGION_ACTIVE )); then
+    (( CURSOR = CURSOR > MARK ? CURSOR : MARK ))
+    zle deactivate-region
+  else
+    zle forward-char
+  fi
+}
+
+zle -N collapse-or-backward-char
+zle -N collapse-or-forward-char
+
+bindkey '^[[D' collapse-or-backward-char
+bindkey '^[[C' collapse-or-forward-char
+
+
+# copy using command + c (needs key binding within iterm app)
+copy-region-to-clipboard() {
+  if (( REGION_ACTIVE )); then
+    zle copy-region-as-kill
+    print -rn -- "$CUTBUFFER" | pbcopy
+    zle deactivate-region
+  fi
+}
+
+zle -N copy-region-to-clipboard
+bindkey '\ec' copy-region-to-clipboard
+
+
+
+# highlight to beginning/end of line: command + shift + left/right
+
+select-beginning-of-line() {
+  (( REGION_ACTIVE )) || zle set-mark-command
+  zle beginning-of-line
+}
+
+select-end-of-line() {
+  (( REGION_ACTIVE )) || zle set-mark-command
+  zle end-of-line
+}
+
+zle -N select-beginning-of-line
+zle -N select-end-of-line
+
+bindkey '\e[H' select-beginning-of-line
+bindkey '\e[F' select-end-of-line
